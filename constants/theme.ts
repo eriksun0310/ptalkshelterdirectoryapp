@@ -28,46 +28,39 @@ export const Colors = {
 };
 
 /**
- * 方案 B：淺藍沉穩色系
- * 適合流浪動物收容所 app - 傳達安定、可靠、安心
+ * 極簡色系：黑白灰 + 單一主色藍
  */
 export const AppColors = {
-  // 主色調
-  primary: '#4A90E2',           // 天空藍 - 安定、可靠
-  primaryLight: '#E3F2FD',      // 主色淺色版 (背景用)
-  primarySoft: 'rgba(74, 144, 226, 0.12)', // 主色透明版 (按鈕背景)
-
-  // 次要色
-  secondary: '#50C878',         // 草綠 - 自然、友善
-  secondaryLight: '#E8F5E9',    // 綠色淺色版
+  // 主色調（唯一的彩色）
+  primary: '#4A90E2',           // 天空藍
+  primaryLight: '#F0F7FF',      // 極淺藍（幾乎白）
+  primarySoft: 'rgba(74, 144, 226, 0.08)',
 
   // 背景色
-  background: '#F7F7F7',        // 暖灰/象牙白 - 閱讀舒適
-  surface: '#FFFFFF',           // 卡片/表面白
+  background: '#F5F5F5',        // 淺灰背景
+  surface: '#FFFFFF',           // 卡片白
 
   // 文字色
-  textPrimary: '#3D3D3D',       // 主要文字 (暖灰)
+  textPrimary: '#333333',       // 主要文字
   textSecondary: '#666666',     // 次要文字
-  textMuted: '#8A8A8A',         // 淡化文字
+  textMuted: '#999999',         // 淡化文字
   textOnPrimary: '#FFFFFF',     // 主色上的文字
 
-  // 功能色
-  success: '#50C878',           // 成功 - 草綠
-  successLight: '#E8F5E9',
-  error: '#C62828',             // 錯誤/否
-  errorLight: '#FFEBEE',
-  warning: '#FF9F43',           // 警示/急件 - 橘色
-  warningLight: '#FFF3E0',
-  info: '#FFD166',              // 輕提醒 - 柔和黃
-  infoLight: '#FFFDE7',
+  // 功能色（統一用灰色系）
+  success: '#666666',
+  successLight: '#F0F0F0',
+  error: '#666666',
+  errorLight: '#F0F0F0',
+  warning: '#666666',
+  warningLight: '#F0F0F0',
 
-  // 標籤色 (淺米色 - 自然感)
-  tagBackground: '#D9C3A4',
-  tagText: '#5D4E37',
+  // 標籤色（淺灰）
+  tagBackground: '#F0F0F0',
+  tagText: '#666666',
 
   // 其他
-  border: '#E0E0E0',
-  divider: '#F0F0F0',
+  border: '#E5E5E5',
+  divider: '#EEEEEE',
 };
 
 export const Fonts = Platform.select({

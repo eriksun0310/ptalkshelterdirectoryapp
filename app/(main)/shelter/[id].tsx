@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: AppColors.textPrimary,
+    color: AppColors.primary,
   },
   location: {
     fontSize: 16,

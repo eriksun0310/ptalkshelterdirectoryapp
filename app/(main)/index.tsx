@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: AppColors.textPrimary,
+    color: AppColors.primary,
     flex: 1,
   },
   cardLocation: {
