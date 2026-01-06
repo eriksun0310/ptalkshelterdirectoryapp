@@ -1,3 +1,4 @@
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams } from 'expo-router';
 import { useMemo } from 'react';
@@ -129,6 +130,23 @@ export default function ShelterDetailScreen() {
           )}
         </View>
 
+        {/* 詳細規定 */}
+        {shelter.rules && shelter.rules.length > 0 && (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>詳細規定</Text>
+            <Text style={styles.rulesHint}>為守護您我安全，請務必遵守以下規則</Text>
+
+            <View style={styles.rulesList}>
+              {shelter.rules.map((rule, index) => (
+                <View key={index} style={styles.ruleItem}>
+                  <Text style={styles.ruleNumber}>{index + 1}</Text>
+                  <Text style={styles.ruleText}>{rule}</Text>
+                </View>
+              ))}
+            </View>
+          </View>
+        )}
+
         {/* 聯絡方式 */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>聯絡方式</Text>
@@ -136,36 +154,18 @@ export default function ShelterDetailScreen() {
 
           <View style={styles.contactButtons}>
             {shelter.contact.line && (
-              <ContactButton
-                icon="chatbubble-ellipses"
-                label="LINE"
-                color="#00B900"
-                onPress={() => handleContact('line')}
-              />
+              <Pressable style={styles.contactButton} onPress={() => handleContact('line')}>
+                <FontAwesome6 name="line" size={24} color={AppColors.primary} />
+              </Pressable>
             )}
             {shelter.contact.phone && (
-              <ContactButton
-                icon="call"
-                label="電話"
-                color="#007AFF"
-                onPress={() => handleContact('phone')}
-              />
+              <ContactButton icon="call" onPress={() => handleContact('phone')} />
             )}
             {shelter.contact.facebook && (
-              <ContactButton
-                icon="logo-facebook"
-                label="Facebook"
-                color="#1877F2"
-                onPress={() => handleContact('facebook')}
-              />
+              <ContactButton icon="logo-facebook" onPress={() => handleContact('facebook')} />
             )}
             {shelter.contact.instagram && (
-              <ContactButton
-                icon="logo-instagram"
-                label="Instagram"
-                color="#E4405F"
-                onPress={() => handleContact('instagram')}
-              />
+              <ContactButton icon="logo-instagram" onPress={() => handleContact('instagram')} />
             )}
           </View>
         </View>
@@ -188,25 +188,17 @@ function NoticeItem({ label, value }: { label: string; value: boolean }) {
   );
 }
 
-// 聯絡按鈕
+// 聯絡按鈕（極簡 icon）
 function ContactButton({
   icon,
-  label,
-  color,
   onPress,
 }: {
   icon: keyof typeof Ionicons.glyphMap;
-  label: string;
-  color: string;
   onPress: () => void;
 }) {
   return (
-    <Pressable
-      style={[styles.contactButton, { backgroundColor: color }]}
-      onPress={onPress}
-    >
-      <Ionicons name={icon} size={24} color="#fff" />
-      <Text style={styles.contactButtonText}>{label}</Text>
+    <Pressable style={styles.contactButton} onPress={onPress}>
+      <Ionicons name={icon} size={24} color={AppColors.primary} />
     </Pressable>
   );
 }
@@ -329,6 +321,36 @@ const styles = StyleSheet.create({
     color: AppColors.warning,
     lineHeight: 20,
   },
+  rulesHint: {
+    fontSize: 13,
+    color: AppColors.textMuted,
+    marginBottom: 16,
+  },
+  rulesList: {
+    gap: 12,
+  },
+  ruleItem: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: 12,
+  },
+  ruleNumber: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    backgroundColor: AppColors.primaryLight,
+    color: AppColors.primary,
+    fontSize: 13,
+    fontWeight: '600',
+    textAlign: 'center',
+    lineHeight: 24,
+  },
+  ruleText: {
+    flex: 1,
+    fontSize: 15,
+    color: AppColors.textPrimary,
+    lineHeight: 22,
+  },
   contactHint: {
     fontSize: 12,
     color: AppColors.textMuted,
@@ -340,17 +362,9 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   contactButton: {
-    flexDirection: 'row',
+    width: 48,
+    height: 48,
+    justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 12,
-    borderRadius: 12,
-    gap: 8,
-    minWidth: 120,
-  },
-  contactButtonText: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: AppColors.textOnPrimary,
   },
 });
