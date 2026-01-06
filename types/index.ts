@@ -43,6 +43,8 @@ export interface ShelterDetail extends ShelterListItem {
   description: string;
   notices: ShelterNotices;
   contact: ContactInfo;
+  /** 詳細規定 (志工/參訪規則) */
+  rules?: string[];
 }
 
 /** 篩選條件 */
