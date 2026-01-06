@@ -1,5 +1,6 @@
 import { Redirect, Stack } from 'expo-router';
 
+import { AppColors } from '@/constants/theme';
 import { useAuthStore } from '@/stores/auth.store';
 
 export default function MainLayout() {
@@ -11,7 +12,19 @@ export default function MainLayout() {
   }
 
   return (
-    <Stack>
+    <Stack
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: AppColors.background,
+        },
+        headerTintColor: AppColors.primary,
+        headerTitleStyle: {
+          color: AppColors.textPrimary,
+          fontWeight: '600',
+        },
+        headerShadowVisible: false,
+      }}
+    >
       <Stack.Screen
         name="index"
         options={{

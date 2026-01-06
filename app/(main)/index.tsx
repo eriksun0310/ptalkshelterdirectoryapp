@@ -12,14 +12,13 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import AreaPickerModal, { SelectedArea } from '@/components/AreaPickerModal';
+import { AppColors } from '@/constants/theme';
 import { TAIWAN_REGIONS, mockShelters } from '@/mocks/shelters';
-import { useAuthStore } from '@/stores/auth.store';
 import type { ShelterListItem } from '@/types';
 import { SHELTER_TAG_LABELS } from '@/types';
 
 export default function ShelterListScreen() {
   const router = useRouter();
-  const logout = useAuthStore((state) => state.logout);
 
   // 篩選狀態
   const [selectedArea, setSelectedArea] = useState<SelectedArea>({
@@ -101,14 +100,6 @@ export default function ShelterListScreen() {
 
   return (
     <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
-      {/* 標題列 */}
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>流浪動物之家</Text>
-        <Pressable style={styles.logoutButton} onPress={logout}>
-          <Ionicons name="log-out-outline" size={22} color="#FF3B30" />
-        </Pressable>
-      </View>
-
       {/* 篩選列 */}
       <View style={styles.filterBar}>
         <Pressable
@@ -118,24 +109,26 @@ export default function ShelterListScreen() {
           <Text style={[styles.filterButtonText, hasFilter && styles.filterButtonTextActive]}>
             {areaButtonText}
           </Text>
-          <Ionicons
-            name="chevron-down"
-            size={16}
-            color={hasFilter ? '#fff' : '#666'}
-          />
+          {hasFilter ? (
+            <Pressable
+              onPress={(e) => {
+                e.stopPropagation();
+                handleClearFilter();
+              }}
+              hitSlop={8}
+            >
+              <Ionicons name="close" size={18} color={AppColors.textOnPrimary} />
+            </Pressable>
+          ) : (
+            <Ionicons name="chevron-down" size={18} color={AppColors.primary} />
+          )}
         </Pressable>
-
-        {hasFilter && (
-          <Pressable style={styles.clearButton} onPress={handleClearFilter}>
-            <Ionicons name="close-circle" size={20} color="#FF3B30" />
-          </Pressable>
-        )}
       </View>
 
       {/* 列表 */}
       {isLoading ? (
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#007AFF" />
+          <ActivityIndicator size="large" color={AppColors.primary} />
         </View>
       ) : (
         <FlatList
@@ -168,55 +161,34 @@ export default function ShelterListScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    backgroundColor: '#fff',
-  },
-  headerTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#333',
+    backgroundColor: AppColors.background,
   },
   filterBar: {
-    flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    backgroundColor: '#fff',
-    borderBottomWidth: 1,
-    borderBottomColor: '#eee',
-    gap: 8,
+    paddingVertical: 16,
   },
   filterButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    backgroundColor: '#f0f0f0',
-    borderRadius: 20,
-    gap: 4,
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    backgroundColor: AppColors.surface,
+    borderRadius: 24,
+    borderWidth: 1.5,
+    borderColor: AppColors.primary,
+    gap: 10,
   },
   filterButtonActive: {
-    backgroundColor: '#007AFF',
+    backgroundColor: AppColors.primary,
+    borderColor: AppColors.primary,
   },
   filterButtonText: {
-    fontSize: 14,
-    color: '#666',
+    fontSize: 16,
+    fontWeight: '500',
+    color: AppColors.primary,
   },
   filterButtonTextActive: {
-    color: '#fff',
-  },
-  clearButton: {
-    padding: 4,
-  },
-  logoutButton: {
-    padding: 8,
+    color: AppColors.textOnPrimary,
   },
   loadingContainer: {
     flex: 1,
@@ -227,14 +199,14 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   card: {
-    backgroundColor: '#fff',
+    backgroundColor: AppColors.surface,
     borderRadius: 12,
     padding: 16,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.08,
     shadowRadius: 4,
-    elevation: 3,
+    elevation: 2,
   },
   cardHeader: {
     flexDirection: 'row',
@@ -244,17 +216,17 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#333',
+    color: AppColors.textPrimary,
     flex: 1,
   },
   cardLocation: {
     fontSize: 14,
-    color: '#666',
+    color: AppColors.textSecondary,
     marginTop: 4,
   },
   cardDescription: {
     fontSize: 14,
-    color: '#999',
+    color: AppColors.textMuted,
     marginTop: 8,
     lineHeight: 20,
   },
@@ -265,14 +237,14 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   tag: {
-    backgroundColor: '#FFF3E0',
+    backgroundColor: AppColors.tagBackground,
     paddingHorizontal: 10,
     paddingVertical: 4,
     borderRadius: 12,
   },
   tagText: {
     fontSize: 12,
-    color: '#E65100',
+    color: AppColors.tagText,
   },
   separator: {
     height: 12,
@@ -285,7 +257,7 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: 16,
-    color: '#999',
+    color: AppColors.textMuted,
     marginTop: 12,
   },
 });

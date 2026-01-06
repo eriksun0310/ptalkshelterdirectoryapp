@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { AppColors } from '@/constants/theme';
 import { mockShelters } from '@/mocks/shelters';
 import { SHELTER_TAG_LABELS } from '@/types';
 
@@ -28,7 +29,7 @@ export default function ShelterDetailScreen() {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.errorContainer}>
-          <Ionicons name="alert-circle" size={48} color="#FF3B30" />
+          <Ionicons name="alert-circle" size={48} color={AppColors.error} />
           <Text style={styles.errorText}>找不到此流浪動物之家</Text>
         </View>
       </SafeAreaView>
@@ -122,7 +123,7 @@ export default function ShelterDetailScreen() {
 
           {shelter.notices.specialNotes && (
             <View style={styles.specialNotes}>
-              <Ionicons name="information-circle" size={20} color="#FF9500" />
+              <Ionicons name="information-circle" size={20} color={AppColors.warning} />
               <Text style={styles.specialNotesText}>{shelter.notices.specialNotes}</Text>
             </View>
           )}
@@ -213,7 +214,7 @@ function ContactButton({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: AppColors.background,
   },
   scrollView: {
     flex: 1,
@@ -229,27 +230,27 @@ const styles = StyleSheet.create({
   },
   errorText: {
     fontSize: 16,
-    color: '#FF3B30',
+    color: AppColors.error,
     marginTop: 12,
   },
   section: {
-    backgroundColor: '#fff',
+    backgroundColor: AppColors.surface,
     borderRadius: 12,
     padding: 16,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.08,
     shadowRadius: 4,
-    elevation: 3,
+    elevation: 2,
   },
   name: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#333',
+    color: AppColors.textPrimary,
   },
   location: {
     fontSize: 16,
-    color: '#666',
+    color: AppColors.textSecondary,
     marginTop: 4,
   },
   tagsContainer: {
@@ -259,25 +260,25 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   tag: {
-    backgroundColor: '#FFF3E0',
+    backgroundColor: AppColors.tagBackground,
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 16,
   },
   tagText: {
     fontSize: 14,
-    color: '#E65100',
+    color: AppColors.tagText,
   },
   description: {
     fontSize: 16,
-    color: '#666',
+    color: AppColors.textSecondary,
     lineHeight: 24,
     marginTop: 16,
   },
   sectionTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#333',
+    color: AppColors.textPrimary,
     marginBottom: 12,
   },
   noticeList: {
@@ -290,7 +291,7 @@ const styles = StyleSheet.create({
   },
   noticeLabel: {
     fontSize: 16,
-    color: '#333',
+    color: AppColors.textPrimary,
   },
   noticeBadge: {
     paddingHorizontal: 12,
@@ -298,25 +299,25 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   noticeBadgeYes: {
-    backgroundColor: '#E8F5E9',
+    backgroundColor: AppColors.successLight,
   },
   noticeBadgeNo: {
-    backgroundColor: '#FFEBEE',
+    backgroundColor: AppColors.errorLight,
   },
   noticeBadgeText: {
     fontSize: 14,
     fontWeight: '600',
   },
   noticeBadgeTextYes: {
-    color: '#2E7D32',
+    color: AppColors.success,
   },
   noticeBadgeTextNo: {
-    color: '#C62828',
+    color: AppColors.error,
   },
   specialNotes: {
     flexDirection: 'row',
     alignItems: 'flex-start',
-    backgroundColor: '#FFF8E1',
+    backgroundColor: AppColors.warningLight,
     padding: 12,
     borderRadius: 8,
     marginTop: 16,
@@ -325,12 +326,12 @@ const styles = StyleSheet.create({
   specialNotesText: {
     flex: 1,
     fontSize: 14,
-    color: '#F57C00',
+    color: AppColors.warning,
     lineHeight: 20,
   },
   contactHint: {
     fontSize: 12,
-    color: '#999',
+    color: AppColors.textMuted,
     marginBottom: 12,
   },
   contactButtons: {
@@ -350,6 +351,6 @@ const styles = StyleSheet.create({
   contactButtonText: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#fff',
+    color: AppColors.textOnPrimary,
   },
 });

@@ -9,6 +9,8 @@ import {
   View,
 } from 'react-native';
 
+import { AppColors } from '@/constants/theme';
+
 export interface SelectedArea {
   city: string | null;
   district: string | null;
@@ -80,11 +82,11 @@ export default function AreaPickerModal({
           <Ionicons
             name={section.isExpanded ? 'chevron-down' : 'chevron-forward'}
             size={16}
-            color="#666"
+            color={AppColors.textSecondary}
           />
           <Text style={styles.cityText}>{section.title}</Text>
         </View>
-        {isSelected && <Ionicons name="checkmark" size={18} color="#007AFF" />}
+        {isSelected && <Ionicons name="checkmark" size={18} color={AppColors.primary} />}
       </Pressable>
     );
   };
@@ -109,7 +111,7 @@ export default function AreaPickerModal({
         <Text style={[styles.districtText, isSelected && styles.districtTextSelected]}>
           {item}
         </Text>
-        {isSelected && <Ionicons name="checkmark" size={16} color="#007AFF" />}
+        {isSelected && <Ionicons name="checkmark" size={16} color={AppColors.primary} />}
       </Pressable>
     );
   };
@@ -122,7 +124,7 @@ export default function AreaPickerModal({
           <View style={styles.header}>
             <Text style={styles.title}>選擇地區</Text>
             <Pressable onPress={onClose} hitSlop={8}>
-              <Ionicons name="close" size={24} color="#333" />
+              <Ionicons name="close" size={24} color={AppColors.textPrimary} />
             </Pressable>
           </View>
 
@@ -142,7 +144,7 @@ export default function AreaPickerModal({
             >
               全部地區
             </Text>
-            {!selectedArea.city && <Ionicons name="checkmark" size={18} color="#007AFF" />}
+            {!selectedArea.city && <Ionicons name="checkmark" size={18} color={AppColors.primary} />}
           </Pressable>
 
           {/* 縣市列表 */}
@@ -167,7 +169,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   modalContent: {
-    backgroundColor: '#fff',
+    backgroundColor: AppColors.surface,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     maxHeight: '75%',
@@ -178,12 +180,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#eee',
+    borderBottomColor: AppColors.divider,
   },
   title: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#333',
+    color: AppColors.textPrimary,
   },
   allAreaRow: {
     flexDirection: 'row',
@@ -192,18 +194,18 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     paddingHorizontal: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#eee',
-    backgroundColor: '#fff',
+    borderBottomColor: AppColors.divider,
+    backgroundColor: AppColors.surface,
   },
   allAreaRowSelected: {
-    backgroundColor: '#F0F8FF',
+    backgroundColor: AppColors.primaryLight,
   },
   allAreaText: {
     fontSize: 16,
-    color: '#333',
+    color: AppColors.textPrimary,
   },
   allAreaTextSelected: {
-    color: '#007AFF',
+    color: AppColors.primary,
     fontWeight: '600',
   },
   listContent: {
@@ -215,12 +217,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 14,
     paddingHorizontal: 16,
-    backgroundColor: '#fff',
+    backgroundColor: AppColors.surface,
     borderBottomWidth: 1,
-    borderBottomColor: '#f0f0f0',
+    borderBottomColor: AppColors.divider,
   },
   cityRowExpanded: {
-    backgroundColor: '#f8f8f8',
+    backgroundColor: AppColors.background,
   },
   cityContent: {
     flexDirection: 'row',
@@ -229,7 +231,7 @@ const styles = StyleSheet.create({
   },
   cityText: {
     fontSize: 16,
-    color: '#333',
+    color: AppColors.textPrimary,
   },
   districtRow: {
     flexDirection: 'row',
@@ -238,19 +240,19 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingLeft: 44,
     paddingRight: 16,
-    backgroundColor: '#fafafa',
+    backgroundColor: AppColors.background,
     borderBottomWidth: 1,
-    borderBottomColor: '#f0f0f0',
+    borderBottomColor: AppColors.divider,
   },
   districtRowSelected: {
-    backgroundColor: '#F0F8FF',
+    backgroundColor: AppColors.primaryLight,
   },
   districtText: {
     fontSize: 15,
-    color: '#666',
+    color: AppColors.textSecondary,
   },
   districtTextSelected: {
-    color: '#007AFF',
+    color: AppColors.primary,
     fontWeight: '600',
   },
 });
